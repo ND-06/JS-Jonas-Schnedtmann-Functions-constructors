@@ -6,13 +6,6 @@ var john = {
   job: 'teacher'
 };
 
-var roberto = {
-  name: "Roberto",
-  lastname: "Monticelli",
-  job: 'ONG Member',
-  yearOfBirth: "1959"
-};
-
 // It is the way to writing an object 
 // We using object litteral.
 // But when you have to create a lot 
@@ -28,18 +21,23 @@ var roberto = {
 
 
 var Person = function(name, lastname, job, yearOfBirth) {
- this.name = name,
+ this.name = name;
  this.lastname = lastname;
  this.job = job;
- this.yearOfBirth = yearOfBirth; 
+ this.yearOfBirth = yearOfBirth;
+ this.calculateAge = function() {
+  console.log(2019 - this.yearOfBirth);
+  } 
 }
 // for function construction, we always begin by a capital letter
 
 
 
-var tony = new Person('Tony', 'Montana', 1979, 'Cop');
-var john = new Person('John', 'Fulci', 1990, 'Teacher');
-var lucio = new Person('Lucio', 'Varela', 1969, 'Soldier');
+var tony = new Person('Tony', 'Montana', 'Cop', 1909);
+var john = new Person('John', 'Fulci', 'Teacher', 1989);
+var lucio = new Person('Lucio', 'Varela', 'Soldier', 1959);
+
+lucio.calculateAge();
 // we can use the function constructor to create the John Object
 // it is called instantiation , because this object "John" is
 // an instance of Person Object
@@ -53,14 +51,12 @@ var lucio = new Person('Lucio', 'Varela', 1969, 'Soldier');
 // but to this new empty object created at the beggining with the new operator
 
 
-
-
 Person.prototype.calculateAge = function() {
   console.log(2019 - this.yearOfBirth);
 };
 
-var jane = new Person('Jane', 1969, 'designer');
-var mark = new Person('Mark', 1948, 'retired');
+var jane = new Person('Jane', 'Malagutti', 'designer', 1987);
+var mark = new Person('Mark', 'Buitoni', 'retired', 1955);
 
 
 john.calculateAge();
