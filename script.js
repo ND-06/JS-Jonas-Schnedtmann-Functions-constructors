@@ -227,8 +227,38 @@ the calAge function will be created and called  only when the the object access 
 
 hence the calcAge will not be called during the creation of object such as john and jeni
 
-there are some cases in which only john object need calcAge and jeni object does not required calc Age in such scenarios,it is very effective
+there are some cases in which only john object need calcAge and jenny object does not required calc Age in such scenarios,it is very effective
 
 we can maintain only one copy function and it can be accessed by the objects which actually need to access  it .
 */ 
 
+/// FIRST CLASS FUNCTION ///
+
+var years = [1949, 2010, 1987, 1988, 1899, 1800];
+
+function arrayCalc(arr, fn) {
+  var arrRes = [];
+  for (var i = 0; i < arr.length; i++) {
+    arrRes.push(fn(arr[i]));
+  }
+  return arrRes;
+}
+
+function calculateAge(el) {
+  return 2019 - el;
+}
+
+function isFullAge(el) {
+  return el >= 18;   
+}
+
+function MaxHeartRate(el) {
+  return Math.round(206.9 - (0.67 * el));
+}
+
+var ages = arrayCalc(years, calculateAge);
+var heartBeats = arrayCalc(ages, MaxHeartRate); 
+var fullAges = arrayCalc(ages, isFullAge);
+console.log(ages);
+console.log(heartBeats);
+console.log(fullAges);
