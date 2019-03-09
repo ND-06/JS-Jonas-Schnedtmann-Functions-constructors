@@ -273,3 +273,69 @@ var fullAgesInUsa = arrayCalc(ages, isFullAgeInUsa);
 console.log(ages);
 console.log(heartBeats);
 console.log(fullAges);
+
+/// FIRST CLASS FUNCTIONS : Functions returning functions  ///
+
+
+function interviewQuestion(job) {
+  return function (name) {
+    if (job === 'cop') {
+      console.log(name + ', can you explain why you have joined this carreer ?');
+    }
+    else if (job === 'financial advisor') {
+      console.log(name + ' in your opinion, what is the best quality for a financial advisor ?');
+    }
+    else if (job === 'lawyer') {
+      console.log('Tell me about your vision of Justice, ' + name);
+    }
+    else {
+      console.log(name + ' What do you do ?');
+    }
+  } 
+}
+
+interviewQuestion('lawyer')('mark');
+
+
+/// IIFE - Functions ///
+
+/*function game() {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+}
+game();
+*/
+
+// This is a IIFE
+
+(function () {
+  var score = Math.random() * 10;
+  console.log(score >= 5);
+})();
+//-- This IIFE is invoked immediatly , the console returns True 
+// so my function has been invoked well
+
+// Obviously , we have a scope error if we write the console.log 
+// console.log(score);
+
+// If we write the function like this ( WITHOUT NAME ) , js will think that is only a 
+// function declaration - but we dont have a name of the function inside 
+// function declaration , JS will throw an error
+// in JS , what is inside parenthesis is a statement
+
+/*function () {
+
+}*/
+
+// IFFE allows us to create data privacy 
+
+(function (goodLuck) {
+  var score = Math.random() * 10;
+  console.log(score >= 5 - goodLuck);
+})(5);
+// No error in this IIFE function , var score cannot be accessed from the outside scope
+// and the function can be invoked immediatly --- Thats typical IIFE.
+
+// All we want is to create a new scope , that is hidden from the outside scope
+
+
