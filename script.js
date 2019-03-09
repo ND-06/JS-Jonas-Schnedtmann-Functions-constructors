@@ -337,5 +337,141 @@ game();
 // and the function can be invoked immediatly --- Thats typical IIFE.
 
 // All we want is to create a new scope , that is hidden from the outside scope
+// 2 mains Advantages to use IIFE --- We get data privacy , and we do not interfere with other 
+// variables
+
+// IIFE is mainly for Data privacy
 
 
+// CLOSURES //
+
+function retirement (retirementAge) {
+  var a = ' years left until retirement.';
+  return function(yearOfBirth) {
+    var age = 2019 - yearOfBirth;
+    console.log((retirementAge - age) + a);
+  }
+}
+
+
+var retirementUS = retirement(66);
+var retirementFrance = retirement(65);
+var retirementGermany = retirement(65);
+var retirementIceland = retirement(67);
+
+
+retirementUS(1990);
+retirementFrance(1987);
+// or we could write like this
+retirement(65)(1987);
+retirementGermany(1960);
+retirementIceland(1970);
+
+
+
+
+// We started by calling the retirement function , and pass 
+// the value of 65. The function declares the A variable and
+// return the function inside the retirement function.
+// then the function finishes and its execution context gets popped 
+// off the stack
+// SO we stored the returned function in the variable retirementFrance
+// then we call it.
+
+// In the function called retirement , we use the retirementAge parameter
+// of the outer function, and also  the A Variable that is also declared outside
+// of the anonymous function ( the returned function).
+// When we run this : ITS WORKS -- We are able to still use these variables
+// event after the retirement function which declare these variables, already stopped its 
+// execution
+
+// Our inner function is able to use the retirement variable and A variable, of the function
+// that is already gone. It has already returned, but the variables are still there 
+// and THIS IS THE CLOSURE
+
+// CLOSURE SUMMARY : AN INNER FUNCTION HAS ALWAYS ACCESS TO THE VARIABLES AND
+// PARAMETERS OF ITS OUTER FUNCTION, EVEN AFTER THE OUTER FUNCTION
+// HAS RETURNED
+
+
+/*var addto = function (passed) {
+  var inner = 2;
+  return inner + passed;
+};*/
+
+// THIS IS A CLOSURE //
+
+// passed variable is outside the scope chain , so normally,
+// we would not be able to access passed variable
+// In JS, variables defined outside functions are automatically 
+// available inside.
+// Technically, in any functions where you using A VARIABLE from outside
+// the scope is a closure 
+// With a closure , it is possible
+
+var passed = 5;
+
+var addto = function() {
+  var inner = 2;
+  return passed + inner;
+}
+
+console.log(addto());
+
+// CLOSURE ARE NOTHING BUT FUNCTIONS WITH PRESERVED DATAS
+
+// A closure is a feature in JavaScript where an inner function
+// has access to the outer (enclosing) function's variables — a scope chain.
+
+// Challenge : Rewrite interviewQuestions function with the power of closures :
+
+// FUNCTION WRITTEN WITH THE OLD WAY , WITHOUT USING CLOSURE POWER !
+// THATS LONG AND NOT VERY DRY
+
+function interviewQuestion(job) {
+  if (job === 'cop') {
+    return function(name) {
+      console.log(name + ' can you explain why you have joined this carreer ?');
+    }
+  }
+  else if (job === 'financial advisor'){
+    return function(name) {
+      console.log(name + ' in your opinion, what is the best quality for a financial advisor ?');
+    }
+  }
+  else if (job === 'lawyer') {
+    return function(name){
+      console.log(name + 'Tell me about your vision of Justice ?');
+    }
+  }
+  else {
+    return function(name) {
+      console.log('so, what do you do ?');
+    }
+  }
+}
+
+interviewQuestion('cop')('Nacho');
+
+
+// WRITE THE SAME FUNCTION WITH THE POWER OF CLOSURE
+// We use only one inner return function 
+
+function interviewQuestion(job){
+  return function(name) {
+    if (job === 'cop') {
+      console.log(name + ', can you explain why you have joined this carreer ?');
+    }
+    else if (job === 'financial advisor') {
+      console.log(name + ' in your opinion, what is the best quality for a financial advisor ?');
+    }
+    else if (job === 'lawyer') {
+      console.log('Tell me about your vision of Justice, ' + name);
+    }
+    else {
+      console.log(name + ' What do you do ?');
+    }
+  }
+}
+
+interviewQuestion('lawyer')('roberto');  
