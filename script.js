@@ -234,7 +234,7 @@ we can maintain only one copy function and it can be accessed by the objects whi
 
 /// FIRST CLASS FUNCTION ///
 
-var years = [1949, 2010, 1987, 1988, 1899, 1800];
+var years = [1949, 2010, 1998, 1987, 1999, 2001, 1988, 1899, 1800];
 
 function arrayCalc(arr, fn) {
   var arrRes = [];
@@ -252,6 +252,16 @@ function isFullAge(el) {
   return el >= 18;   
 }
 
+function isFullAgeInUsa(el) {
+  if (el >= 21) {
+    console.log('Has full age in Usa');
+  }
+  else {
+    console.log('has not the full age in Usa');
+  }
+}
+
+
 function MaxHeartRate(el) {
   return Math.round(206.9 - (0.67 * el));
 }
@@ -259,6 +269,7 @@ function MaxHeartRate(el) {
 var ages = arrayCalc(years, calculateAge);
 var heartBeats = arrayCalc(ages, MaxHeartRate); 
 var fullAges = arrayCalc(ages, isFullAge);
+var fullAgesInUsa = arrayCalc(ages, isFullAgeInUsa);
 console.log(ages);
 console.log(heartBeats);
 console.log(fullAges);
