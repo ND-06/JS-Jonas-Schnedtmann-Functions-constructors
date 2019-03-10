@@ -234,6 +234,8 @@ we can maintain only one copy function and it can be accessed by the objects whi
 
 /// FIRST CLASS FUNCTION ///
 
+/// FUNCTIONS ARE SPECIAL KIND OF OBJECTS
+
 var years = [1949, 2010, 1998, 1987, 1999, 2001, 1988, 1899, 1800];
 
 function arrayCalc(arr, fn) {
@@ -475,3 +477,99 @@ function interviewQuestion(job){
 }
 
 interviewQuestion('lawyer')('roberto');  
+
+
+// BIND, CALL AND APPLY METHODS
+
+
+//CALL METHOD 
+
+var john = {
+  name: 'john',
+  age: '26',
+  job: 'teacher',
+  presentation: function(style, timeOfDay) {
+    if (style === 'formal') {
+      console.log('Good ' + timeOfDay + ', Ladies and gentlemens! I\'m ' + this.name + ', I\'m a ' 
+      + this.job + ' and i\'m ' + this.age + ' years old.');
+    } else if (style === 'friendly') {
+      console.log('Hey, what\'s up Buddy ? I\'m ' + this.name + ', I\'m a ' 
+      + this.job + ' and i\'m ' + this.age + ' years old. Have a nice ' + timeOfDay);
+    }
+  }
+}
+
+john.presentation('formal', 'morning');
+john.presentation('friendly', 'evening');
+
+var emily = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer',
+};
+
+john.presentation.call(emily, 'friendly', 'afternoon');
+
+// ITS WORKS ! THE CALL METHOD ALLOWS US TO SET THE 'THIS VARIABLE' IN THE FIRST ARGUMENT, AND WE BORROWED 
+// THE JOHN'S PRESENTATION METHOD
+
+
+// APPLY METHOD
+
+// Its almost the same that Call Method , except that apply method is for arrays
+
+// That will not work here but it would be like this : 
+
+//john.presentation.apply(emily, ['friendly', 'afternoon']);//
+
+// BIND METHOD
+
+
+
+var johnFriendly = john.presentation.bind(john, 'friendly');
+var johnFormal = john.presentation.bind(john, 'formal');
+johnFriendly('Morning');
+johnFormal('Evening');
+
+
+// Some Ultra Basic Exercices : 
+
+// Return the minimum number 
+
+function min(x, y) {
+  return Math.min(x, y);
+}
+
+console.log(min(7878878878,8787878787));
+
+// Is even or Odd ?
+
+function isEven(x) {
+  if (x % 2 === 0){
+    return true;
+  }
+  else if (x % 2 === 1) {
+    return false;
+  }
+  else {
+    console.log('This number is a negative number , that\'s not an even or odd number');
+  }
+}
+
+console.log(isEven(50));
+console.log(isEven(75));
+console.log(isEven(-1));
+
+// Count the occurence of one specified letter in a string
+
+function char_count(str, letter) {
+  var letter_count = 0;
+  for (var position = 0; position < str.length; position++) {
+    if (str.charAt(position) == letter) {
+      letter_count += 1;
+    }
+  }
+  return letter_count;
+}
+
+console.log(char_count('Javascript', 'a'));
